@@ -24,7 +24,7 @@ export const Contact: React.FC = () => {
               backgroundColor: 'var(--color-primary)',
               color: '#FFFFFF',
               borderRadius: 'var(--radius-xl)',
-              padding: 'clamp(2rem, 5vw, 4rem)',
+              padding: 'clamp(1.75rem, 3.5vw, 3rem)',
               border: '2px solid var(--color-primary-dark)',
               boxShadow: 'var(--shadow-card)',
               position: 'relative',
@@ -40,7 +40,7 @@ export const Contact: React.FC = () => {
               style={{
                 display: 'grid',
                 gridTemplateColumns: '1.2fr 0.8fr',
-                gap: '3rem',
+                gap: '2.5rem',
                 alignItems: 'start'
               }}
               className="contact-grid"
@@ -50,7 +50,7 @@ export const Contact: React.FC = () => {
                 <h2
                   style={{
                     fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(2.25rem, 4.5vw, 3.75rem)',
+                    fontSize: 'clamp(1.85rem, 3vw, 3rem)',
                     fontWeight: 700,
                     lineHeight: 1.05,
                     letterSpacing: '-0.03em',

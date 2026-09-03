@@ -16,7 +16,7 @@ export const Skills: React.FC = () => {
             <h2
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2rem, 4vw, 3.25rem)',
+                fontSize: 'clamp(1.75rem, 2.5vw, 2.75rem)',
                 fontWeight: 700,
                 color: 'var(--color-primary)',
                 lineHeight: 1.1,
@@ -33,8 +33,8 @@ export const Skills: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '1.5rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
+            gap: '1.25rem',
             marginBottom: '2.5rem'
           }}
         >
@@ -45,7 +45,7 @@ export const Skills: React.FC = () => {
                   backgroundColor: 'var(--color-surface-cream)',
                   border: '1.5px solid var(--color-border)',
                   borderRadius: 'var(--radius-xl)',
-                  padding: '1.75rem',
+                  padding: 'clamp(1.25rem, 1.8vw, 1.6rem)',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',

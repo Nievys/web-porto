@@ -96,12 +96,16 @@ export const Navbar: React.FC = () => {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href === '#hero') {
       e.preventDefault();
+      if (isDrawerOpen) {
+        window.dispatchEvent(new CustomEvent('close-contact-drawer'));
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
       closeMobileMenu();
       return;
     }
     if (href === '#contact') {
-      setIsDrawerOpen(true);
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('open-contact-drawer'));
       closeMobileMenu();
       return;
     }
@@ -109,6 +113,9 @@ export const Navbar: React.FC = () => {
     const element = document.getElementById(targetId);
     if (element) {
       e.preventDefault();
+      if (isDrawerOpen) {
+        window.dispatchEvent(new CustomEvent('close-contact-drawer'));
+      }
       element.scrollIntoView({ behavior: 'smooth' });
       closeMobileMenu();
     }
@@ -135,8 +142,8 @@ export const Navbar: React.FC = () => {
         >
           <div
             style={{
-              width: '36px',
-              height: '36px',
+              width: 'var(--nav-logo-size)',
+              height: 'var(--nav-logo-size)',
               backgroundColor: 'var(--color-primary)',
               color: 'var(--color-accent)',
               borderRadius: 'var(--radius-sm)',
@@ -145,7 +152,7 @@ export const Navbar: React.FC = () => {
               justifyContent: 'center',
               fontFamily: 'var(--font-display)',
               fontWeight: 700,
-              fontSize: '1.1rem',
+              fontSize: 'var(--nav-logo-font)',
               border: '1.5px solid var(--color-primary-dark)',
               boxShadow: '0 2px 8px rgba(40, 90, 113, 0.18)',
               flexShrink: 0
@@ -158,7 +165,7 @@ export const Navbar: React.FC = () => {
               style={{
                 fontFamily: 'var(--font-display)',
                 fontWeight: 700,
-                fontSize: '1rem',
+                fontSize: 'var(--nav-title-font)',
                 letterSpacing: '-0.02em',
                 color: 'var(--color-primary)',
                 lineHeight: 1.1,
@@ -172,7 +179,7 @@ export const Navbar: React.FC = () => {
             <span
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.625rem',
+                fontSize: 'var(--nav-subtitle-font)',
                 letterSpacing: '0.08em',
                 color: 'var(--color-text-secondary)',
                 textTransform: 'uppercase',
@@ -187,18 +194,18 @@ export const Navbar: React.FC = () => {
         </a>
 
         {/* Right Status Indicator & Contact Button (Desktop) */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexShrink: 0 }}>
           <div
             className="hide-mobile"
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.35rem 0.85rem',
+              gap: '0.4rem',
+              padding: 'var(--nav-status-padding)',
               backgroundColor: 'var(--color-surface-cream)',
               border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius-full)',
-              fontSize: '0.75rem',
+              fontSize: 'var(--nav-status-font)',
               fontFamily: 'var(--font-mono)',
               color: 'var(--color-primary)'
             }}
@@ -221,7 +228,11 @@ export const Navbar: React.FC = () => {
             variant="accent"
             size="sm"
             className="hide-mobile"
-            icon={<ArrowUpRight size={15} />}
+            style={{
+              padding: 'var(--nav-btn-padding)',
+              fontSize: 'var(--nav-btn-font)'
+            }}
+            icon={<ArrowUpRight size={13} />}
           >
             Get in Touch
           </Button>
@@ -266,15 +277,12 @@ export const Navbar: React.FC = () => {
         className={`hide-mobile side-navbar-container ${isLifted ? 'footer-lifted' : ''}`}
         style={{
           position: 'fixed',
-          right: '1.75rem',
-          top: '50%',
-          transform: isLifted ? 'translateY(calc(-50% - 270px))' : 'translateY(-50%)',
+          right: 'clamp(1rem, 1.5vw, 2rem)',
           zIndex: 950,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-end',
-          gap: '0.65rem',
-          transition: 'transform 380ms cubic-bezier(0.16, 1, 0.3, 1)'
+          gap: '0.55rem'
         }}
         aria-label="Side Navigation"
       >
@@ -285,10 +293,10 @@ export const Navbar: React.FC = () => {
             WebkitBackdropFilter: 'blur(12px)',
             border: '1.5px solid var(--color-border-strong)',
             borderRadius: 'var(--radius-xl)',
-            padding: '0.75rem 0.55rem',
+            padding: 'var(--side-nav-wrapper-padding)',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.45rem',
+            gap: 'var(--side-nav-wrapper-gap)',
             boxShadow: '0 12px 35px rgba(40, 90, 113, 0.15)'
           }}
         >
@@ -309,7 +317,7 @@ export const Navbar: React.FC = () => {
                   justifyContent: 'flex-end',
                   textDecoration: 'none',
                   position: 'relative',
-                  padding: '0.35rem 0.5rem',
+                  padding: 'var(--side-nav-link-padding)',
                   borderRadius: 'var(--radius-full)',
                   backgroundColor: isActive ? 'var(--color-primary)' : isHovered ? 'var(--color-surface-tint)' : 'transparent',
                   color: isActive ? 'var(--color-accent)' : 'var(--color-primary)',
@@ -323,13 +331,13 @@ export const Navbar: React.FC = () => {
                     style={{
                       position: 'absolute',
                       right: '100%',
-                      marginRight: '0.75rem',
+                      marginRight: '0.65rem',
                       backgroundColor: 'var(--color-primary-dark)',
                       color: isActive ? 'var(--color-accent)' : '#FFFFFF',
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '0.75rem',
+                      fontSize: 'var(--side-nav-tooltip-font)',
                       fontWeight: 700,
-                      padding: '0.3rem 0.75rem',
+                      padding: 'var(--side-nav-tooltip-padding)',
                       borderRadius: 'var(--radius-full)',
                       whiteSpace: 'nowrap',
                       boxShadow: '0 4px 15px rgba(19, 47, 60, 0.25)',
@@ -348,10 +356,10 @@ export const Navbar: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    minWidth: '28px',
-                    height: '28px',
+                    minWidth: 'var(--side-nav-badge-size)',
+                    height: 'var(--side-nav-badge-size)',
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '0.75rem',
+                    fontSize: 'var(--side-nav-badge-font)',
                     fontWeight: 700,
                     borderRadius: 'var(--radius-full)'
                   }}

@@ -202,7 +202,7 @@ export const Projects: React.FC = () => {
         }
         .projects-heading {
           font-family: var(--font-display);
-          font-size: clamp(1.75rem, 3.5vw, 3rem);
+          font-size: clamp(1.65rem, 2.4vw, 2.65rem);
           font-weight: 700;
           color: var(--color-primary);
           line-height: 1.15;
@@ -250,9 +250,15 @@ export const Projects: React.FC = () => {
         .bc--wide  { grid-column: span 3; }
 
         /* ── Card heights ── */
-        .bc--large { min-height: 420px; }
-        .bc--small { min-height: 420px; }
-        .bc--wide  { min-height: 300px; }
+        .bc--large { min-height: 370px; }
+        .bc--small { min-height: 370px; }
+        .bc--wide  { min-height: 270px; }
+
+        @media (min-width: 1900px) {
+          .bc--large { min-height: 440px; }
+          .bc--small { min-height: 440px; }
+          .bc--wide  { min-height: 320px; }
+        }
 
         /* ════════════════════════════════════
            CARD BASE

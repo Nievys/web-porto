@@ -30,7 +30,7 @@ export const About: React.FC = () => {
               <h2
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(2rem, 3.8vw, 3.25rem)',
+                  fontSize: 'clamp(1.75rem, 2.5vw, 2.75rem)',
                   fontWeight: 700,
                   lineHeight: 1.1,
                   letterSpacing: '-0.03em',

@@ -17,7 +17,7 @@ export const Experience: React.FC = () => {
             <h2
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2rem, 4vw, 3.25rem)',
+                fontSize: 'clamp(1.75rem, 2.5vw, 2.75rem)',
                 fontWeight: 700,
                 color: 'var(--color-primary)',
                 lineHeight: 1.1,
@@ -31,7 +31,7 @@ export const Experience: React.FC = () => {
         </div>
 
         {/* Experience Editorial Timeline */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {experiences.map((exp, idx) => (
             <Reveal key={exp.id} direction="up" delay={idx * 120 + 100} duration={650}>
               <div
@@ -39,7 +39,7 @@ export const Experience: React.FC = () => {
                   backgroundColor: 'var(--color-surface-cream)',
                   border: '1.5px solid var(--color-border)',
                   borderRadius: 'var(--radius-xl)',
-                  padding: 'clamp(1.5rem, 3vw, 2.25rem)',
+                  padding: 'clamp(1.25rem, 2vw, 2rem)',
                   transition: 'border-color var(--transition-fast)',
                   boxShadow: 'var(--shadow-subtle)'
                 }}

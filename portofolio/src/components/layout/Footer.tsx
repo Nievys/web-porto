@@ -131,15 +131,19 @@ export const Footer: React.FC = () => {
   // Calculate the invisible barrier separating "Let's Talk." from the right pill cluster (Desktop only)
   const getBarrierX = useCallback((width: number): number => {
     if (width < 768) return 0; // No barrier on mobile
-    if (!arenaRef.current) return width * 0.58;
+    if (!arenaRef.current) return width * 0.52;
     const textEl = giantTextRef.current;
-    if (!textEl) return width * 0.58;
+    if (!textEl) return width * 0.52;
 
     const textRect = textEl.getBoundingClientRect();
     const arenaRect = arenaRef.current.getBoundingClientRect();
-    const measuredRight = textRect.right - arenaRect.left + 35;
+    const measuredRight = textRect.right - arenaRect.left + 25;
 
-    return Math.max(Math.min(measuredRight, width - 260), width * 0.52);
+    // Ensure right drop zone always has at least 380px or 42% of width
+    const maxBarrier = Math.min(width - 380, width * 0.58);
+    const minBarrier = Math.min(width * 0.46, width - 420);
+
+    return Math.max(minBarrier, Math.min(measuredRight, maxBarrier));
   }, []);
 
   // Drop / Respawn pills:
@@ -258,11 +262,11 @@ export const Footer: React.FC = () => {
 
     PILL_ITEMS.forEach((item, index) => {
       const el = pillElementsRef.current.get(item.id);
-      const measuredWidth = el ? el.offsetWidth : 160;
-      const measuredHeight = el ? el.offsetHeight : 46;
+      const measuredWidth = el ? el.offsetWidth : 140;
+      const measuredHeight = el ? el.offsetHeight : 42;
 
-      const w = Math.max(120, measuredWidth);
-      const h = Math.max(38, measuredHeight);
+      const w = Math.max(105, measuredWidth);
+      const h = Math.max(34, measuredHeight);
 
       let initialX: number;
       if (isMobile) {
