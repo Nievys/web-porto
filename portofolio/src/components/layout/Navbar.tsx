@@ -63,6 +63,57 @@ export const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   };
 
+  const [isFooterInView, setIsFooterInView] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const footerEl = document.getElementById('contact');
+      if (!footerEl) return;
+      const rect = footerEl.getBoundingClientRect();
+      setIsFooterInView(rect.top < window.innerHeight - 40);
+    };
+
+    const handleDrawerOpen = () => setIsDrawerOpen(true);
+    const handleDrawerClose = () => setIsDrawerOpen(false);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    window.addEventListener('contact-drawer-open', handleDrawerOpen);
+    window.addEventListener('contact-drawer-close', handleDrawerClose);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('contact-drawer-open', handleDrawerOpen);
+      window.removeEventListener('contact-drawer-close', handleDrawerClose);
+    };
+  }, []);
+
+  const isLifted = isDrawerOpen || isFooterInView || activeSection === 'contact';
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === '#hero') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      closeMobileMenu();
+      return;
+    }
+    if (href === '#contact') {
+      setIsDrawerOpen(true);
+      closeMobileMenu();
+      return;
+    }
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      e.preventDefault();
+      element.scrollIntoView({ behavior: 'smooth' });
+      closeMobileMenu();
+    }
+  };
+
   return (
     <>
       {/* 1. TOP FLOATING CENTERED ROUNDED HEADER (DESKTOP & MOBILE) */}
@@ -70,6 +121,10 @@ export const Navbar: React.FC = () => {
         {/* Logo Mark & Name */}
         <a
           href="#hero"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -182,8 +237,9 @@ export const Navbar: React.FC = () => {
           top: '14px',
           right: '14px',
           zIndex: 1001,
-          width: '44px',
-          height: '44px',
+          width: '46px',
+          height: '46px',
+          boxSizing: 'border-box',
           padding: 0,
           backgroundColor: 'rgba(252, 228, 192, 0.97)',
           backdropFilter: 'blur(16px)',
@@ -207,17 +263,18 @@ export const Navbar: React.FC = () => {
 
       {/* 3. VERTICAL SIDE NAVBAR (FLOATING IN THE MIDDLE SIDES - DESKTOP) */}
       <nav
-        className="hide-mobile side-navbar-container"
+        className={`hide-mobile side-navbar-container ${isLifted ? 'footer-lifted' : ''}`}
         style={{
           position: 'fixed',
           right: '1.75rem',
           top: '50%',
-          transform: 'translateY(-50%)',
+          transform: isLifted ? 'translateY(calc(-50% - 270px))' : 'translateY(-50%)',
           zIndex: 950,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-end',
-          gap: '0.65rem'
+          gap: '0.65rem',
+          transition: 'transform 380ms cubic-bezier(0.16, 1, 0.3, 1)'
         }}
         aria-label="Side Navigation"
       >
@@ -243,6 +300,7 @@ export const Navbar: React.FC = () => {
               <a
                 key={item.id}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 onMouseEnter={() => setHoveredIndex(item.id)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 style={{
@@ -356,7 +414,7 @@ export const Navbar: React.FC = () => {
                   <a
                     key={item.id}
                     href={item.href}
-                    onClick={closeMobileMenu}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     style={{
                       fontFamily: 'var(--font-display)',
                       fontSize: '1.25rem',

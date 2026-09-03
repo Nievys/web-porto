@@ -18,14 +18,14 @@ const PILL_ITEMS: PillConfig[] = [
     id: 'linkedin',
     label: 'LinkedIn',
     variant: 'outlined',
-    url: profile.linkedin,
+    url: `https://www.linkedin.com/in/tyo-indra`,
     actionType: 'link'
   },
   {
     id: 'email',
     label: 'Email',
     variant: 'light',
-    url: `mailto:${profile.email}`,
+    url: `mailto:tyoindra2504@gmail.com`,
     actionType: 'link'
   },
   {
@@ -38,14 +38,14 @@ const PILL_ITEMS: PillConfig[] = [
     id: 'github',
     label: 'GitHub',
     variant: 'dark',
-    url: profile.github,
+    url: `https://github.com/Nievys`,
     actionType: 'link'
   },
   {
     id: 'telephone',
     label: 'Telephone',
     variant: 'outlined',
-    url: `tel:${profile.phone.replace(/\s+/g, '')}`,
+    url: `https://wa.me/6289516823435`,
     actionType: 'link'
   },
   {
@@ -59,7 +59,7 @@ const PILL_ITEMS: PillConfig[] = [
     id: 'instagram',
     label: 'Instagram',
     variant: 'outlined',
-    url: profile.instagram || 'https://instagram.com',
+    url: `https://www.instagram.com/tyoind25/`,
     actionType: 'link'
   },
   {
@@ -229,7 +229,11 @@ export const Footer: React.FC = () => {
 
     const leftWall = Matter.Bodies.rectangle(-25, height / 2, 50, height * 2.5, wallOptions);
     const rightWall = Matter.Bodies.rectangle(width + 25, height / 2, 50, height * 2.5, wallOptions);
-    const floor = Matter.Bodies.rectangle(width / 2, height - 15, width * 2, 50, wallOptions);
+
+    // On mobile: place floor above the two-line "Let's Talk & Connect." text so pills never cover it!
+    const textHeight = giantTextRef.current ? giantTextRef.current.offsetHeight : 150;
+    const floorY = isMobile ? height - textHeight - 25 : height - 15;
+    const floor = Matter.Bodies.rectangle(width / 2, floorY, width * 2, 50, wallOptions);
 
     const barrierX = getBarrierX(width);
     // On desktop: barrier prevents entering text. On mobile: placed offscreen
@@ -391,7 +395,9 @@ export const Footer: React.FC = () => {
       const barrierX = getBarrierX(width);
 
       Matter.Body.setPosition(rightWall, { x: width + 25, y: height / 2 });
-      Matter.Body.setPosition(floor, { x: width / 2, y: height - 15 });
+      const textHeight = giantTextRef.current ? giantTextRef.current.offsetHeight : 150;
+      const floorY = isMobile ? height - textHeight - 25 : height - 15;
+      Matter.Body.setPosition(floor, { x: width / 2, y: floorY });
       if (textBarrier) {
         Matter.Body.setPosition(textBarrier, {
           x: isMobile ? -9999 : barrierX - 10,
@@ -415,6 +421,36 @@ export const Footer: React.FC = () => {
     return () => resizeObserver.disconnect();
   }, [getBarrierX]);
 
+  // Track scroll position to update --footer-reveal-progress for gradual soft blur
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        const container = containerRef.current;
+        if (container) {
+          const rect = container.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          const progress = Math.min(1, Math.max(0, (windowHeight - rect.top) / (rect.height * 0.75)));
+
+          const curtainGroup = container.closest('.skills-footer-curtain-group') as HTMLElement | null;
+          if (curtainGroup) {
+            curtainGroup.style.setProperty('--footer-reveal-progress', progress.toFixed(3));
+          }
+        }
+        ticking = false;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   // Open Contact Drawer instantly with keyframe slide-up animation
   const openDrawer = useCallback(() => {
     // If mobile, smooth scroll to contact instead of drawer
@@ -426,6 +462,7 @@ export const Footer: React.FC = () => {
 
     // Explicitly notify navigation that Contact is active while drawer is open
     window.dispatchEvent(new CustomEvent('set-active-section', { detail: 'contact' }));
+    window.dispatchEvent(new CustomEvent('contact-drawer-open'));
 
     setIsDrawerMounted(true);
     setIsDrawerClosing(false);
@@ -441,6 +478,7 @@ export const Footer: React.FC = () => {
     setIsDrawerOpen(false);
     setIsDrawerClosing(true);
     wasOutOfViewRef.current = true;
+    window.dispatchEvent(new CustomEvent('contact-drawer-close'));
 
     // IMMEDIATELY restore active section to whatever is currently visible on screen
     window.dispatchEvent(new CustomEvent('recheck-active-section'));
@@ -544,7 +582,7 @@ export const Footer: React.FC = () => {
     targetEl.classList.add('is-dragging');
     isDraggingRef.current = true;
 
-    const { body, w } = bodyEntry;
+    const { body, w, h } = bodyEntry;
     Matter.Sleeping.set(body, false);
 
     const startX = e.clientX;
@@ -572,7 +610,10 @@ export const Footer: React.FC = () => {
       // On mobile: can drag anywhere full width. On desktop: bounded right of barrier
       const minX = isMobile ? w / 2 + 5 : barrierX + w / 2 + 5;
       const targetPosX = Math.max(minX, Math.min(arena.clientWidth - w / 2 - 5, moveEvent.clientX - rect.left));
-      const targetPosY = moveEvent.clientY - rect.top;
+
+      const textHeight = giantTextRef.current ? giantTextRef.current.offsetHeight : 150;
+      const maxY = isMobile ? arena.clientHeight - textHeight - h / 2 - 25 : arena.clientHeight - h / 2 - 5;
+      const targetPosY = Math.max(30, Math.min(maxY, moveEvent.clientY - rect.top));
 
       Matter.Body.setPosition(body, { x: targetPosX, y: targetPosY });
 
@@ -700,7 +741,7 @@ export const Footer: React.FC = () => {
           {/* Giant Bottom Typography: Let's Talk. (Bold & Extra Large) */}
           <div className="physics-footer__giant-text-wrapper">
             <h1 ref={giantTextRef} className="physics-footer__giant-text">
-              Let's Talk.
+              Let's Talk <br /> & Connect.
             </h1>
           </div>
 

@@ -209,20 +209,38 @@ ol {
   .top-navbar-capsule.hidden-nav {
     transform: translate(-50%, -150%);
   }
+
+  .top-navbar-capsule.hero-hidden {
+    transform: translate(-50%, -160%) !important;
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
-/* Mobile Header Sizing — left-anchored, avoids hamburger button on the right */
+/* Side Navbar position shift when Footer is in view */
+.side-navbar-container {
+  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.side-navbar-container.footer-lifted {
+  transform: translateY(calc(-50% - 270px)) !important;
+}
+
+/* Mobile Header Sizing — left-anchored, perfectly aligned in height and top with hamburger button */
 @media (max-width: 768px) {
   .top-navbar-capsule {
+    top: 14px;
     left: 14px;
     right: 68px;
-    /* 44px hamburger + 14px gap + 10px margin = 68px */
+    height: 46px;
+    box-sizing: border-box;
     width: auto;
     max-width: calc(100vw - 82px);
-    /* prevent overflow on very small screens */
     transform: translateY(0);
-    padding: 0.45rem 0.75rem;
+    padding: 0.35rem 0.75rem;
     overflow: hidden;
+    display: flex;
+    align-items: center;
   }
 
   .top-navbar-capsule.hidden-nav {
