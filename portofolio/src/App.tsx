@@ -6,7 +6,7 @@ import { Projects } from './components/projects/Projects';
 import { Experience } from './components/experience/Experience';
 import { Skills } from './components/skills/Skills';
 // import { Approach } from './components/approach/Approach';
-import { Contact } from './components/contact/Contact';
+// import { Contact } from './components/contact/Contact';
 import { Footer } from './components/layout/Footer';
 
 export const App: React.FC = () => {
@@ -15,19 +15,25 @@ export const App: React.FC = () => {
       {/* Navigation */}
       <Navbar />
 
-      {/* Main Content Sections */}
-      <main style={{ flex: 1 }}>
+      {/* Main Content Sections: Hero through Experience */}
+      <main style={{ flex: 1, position: 'relative' }}>
         <Hero />
         <About />
         <Projects />
         <Experience />
-        <Skills />
         {/* <Approach /> */}
-        <Contact />
+        {/* <Contact /> - Replaced by the interactive physics contact footer */}
       </main>
 
-      {/* Footer */}
-      <Footer />
+      {/* Dedicated Curtain Reveal Group: Skills holds stationary while Footer rises over it */}
+      <div className="skills-footer-curtain-group">
+        <div className="skills-curtain-item">
+          <Skills />
+        </div>
+        <div className="footer-curtain-item">
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 };

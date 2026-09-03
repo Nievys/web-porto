@@ -6,6 +6,8 @@ export interface ProfileData {
   phone: string;
   linkedin: string;
   github: string;
+  instagram?: string;
+  resumeUrl?: string; // Tautkan URL Google Drive resume/CV di sini jika sudah tersedia
   bio: string;
   tagline: string;
   education: {
@@ -38,6 +40,8 @@ export const profile: ProfileData = {
   phone: "+62 895 1682 3435",
   linkedin: "https://linkedin.com",
   github: "https://github.com",
+  instagram: "https://instagram.com",
+  resumeUrl: "", // Isi dengan link Google Drive resume / CV Tyo Indra nanti
   tagline: "Building digital interfaces that are responsive, robust, and thoughtfully engineered.",
   bio: "Bachelor's degree in Informatics Engineering from Universitas Budi Luhur with practical experience in software engineering across mobile, web, and backend systems. Experienced in handling the development process across multiple layers of an application, from frontend and mobile interfaces to backend services, cryptographic data security, and database integration.",
   education: {
