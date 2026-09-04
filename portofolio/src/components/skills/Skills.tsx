@@ -16,10 +16,10 @@ export const Skills: React.FC = () => {
             <h2
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(1.75rem, 2.5vw, 2.75rem)',
+                fontSize: 'clamp(1.45rem, 1.8vw, 2.35rem)',
                 fontWeight: 700,
                 color: 'var(--color-primary)',
-                lineHeight: 1.1,
+                lineHeight: 1.15,
                 letterSpacing: '-0.03em'
               }}
             >

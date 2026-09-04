@@ -30,18 +30,18 @@ export const About: React.FC = () => {
               <h2
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(1.75rem, 2.5vw, 2.75rem)',
+                  fontSize: 'clamp(1.45rem, 1.8vw, 2.35rem)',
                   fontWeight: 700,
-                  lineHeight: 1.1,
+                  lineHeight: 1.15,
                   letterSpacing: '-0.03em',
                   color: 'var(--color-primary)',
-                  marginBottom: '1.75rem'
+                  marginBottom: '1.25rem'
                 }}
               >
                 Turning ideas into interfaces that are <span style={{ textDecoration: 'underline', textDecorationColor: 'var(--color-accent)', textUnderlineOffset: '6px' }}>clear, resilient</span>, and built to scale.
               </h2>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', fontSize: '1rem', color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem', fontSize: '0.92rem', color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>
                 <p>
                   I am a <strong>Mobile and Fronted Developer</strong> with a Bachelor's degree in Informatics Engineering from <strong>Universitas Budi Luhur</strong> (GPA 3.87/4.00). My development approach spans multiple layers of modern digital platforms from intuitive, responsive frontend interfaces to cross-platform mobile apps and secure backend API integrations.
                 </p>

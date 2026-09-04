@@ -77,12 +77,12 @@
    /* 30px */
    --text-4xl: 2.25rem;
    /* 36px */
-   --text-5xl: 3rem;
-   /* 48px */
-   --text-6xl: 3.75rem;
-   /* 60px */
-   --text-display: clamp(2rem, 3.2vw + 0.5rem, 4.5rem);
-   --text-huge: clamp(2.75rem, 5.5vw + 0.5rem, 6.5rem);
+   --text-5xl: 2.5rem;
+   /* 40px */
+   --text-6xl: 3.25rem;
+   /* 52px */
+   --text-display: clamp(1.75rem, 2.2vw + 0.4rem, 3.25rem);
+   --text-huge: clamp(2.4rem, 3.6vw + 0.4rem, 4.75rem);
 
    /* ==========================================================================
      SPACING & LAYOUT
@@ -99,25 +99,31 @@
    /* 24px */
    --space-lg: 2rem;
    /* 32px */
-   --space-xl: 3rem;
-   /* 48px */
-   --space-2xl: 4.25rem;
-   /* 68px */
-   --space-3xl: 5.5rem;
-   /* 88px */
-   --space-4xl: 7.5rem;
-   /* 120px */
+   --space-xl: 2.5rem;
+   /* 40px */
+   --space-2xl: 3.75rem;
+   /* 60px */
+   --space-3xl: 5rem;
+   /* 80px */
+   --space-4xl: 6.5rem;
+   /* 104px */
 
-   --container-max: 1180px;
+   --container-max: 1040px;
    --container-padding: 1.5rem;
 }
 
-@media (min-width: 1900px) {
+@media (min-width: 2000px) {
   :root {
+    --text-5xl: 3rem;
+    --text-6xl: 3.75rem;
+    --text-display: clamp(2rem, 3.2vw + 0.5rem, 4.5rem);
+    --text-huge: clamp(2.75rem, 5.5vw + 0.5rem, 6.5rem);
     --container-max: 1360px;
     --container-padding: 2.25rem;
+    --space-xl: 3rem;
     --space-2xl: 4.75rem;
     --space-3xl: 6.5rem;
+    --space-4xl: 7.5rem;
   }
 }
 

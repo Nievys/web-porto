@@ -194,8 +194,7 @@
 }
 
 /* ==========================================================================
-   CURTAIN REVEAL EFFECT (Dedicated Skills-Footer Group)
-   Skills stays stationary while Footer rises over it from below
+   SKILLS & FOOTER FLOW (Clean non-overlapping document flow)
    ========================================================================== */
 .skills-footer-curtain-group {
   position: relative;
@@ -212,34 +211,6 @@
 .footer-curtain-item {
   position: relative;
   width: 100%;
-  min-height: 560px;
-}
-
-@media (min-width: 900px) {
-  .skills-curtain-item {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    min-height: 100vh;
-  }
-
-  /* Gradual soft blur on Skills as Footer rises over it on scroll (never too blurry or dark) */
-  .skills-curtain-item::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: rgba(40, 90, 113, calc(var(--footer-reveal-progress, 0) * 0.08));
-    backdrop-filter: blur(calc(var(--footer-reveal-progress, 0) * 4px));
-    -webkit-backdrop-filter: blur(calc(var(--footer-reveal-progress, 0) * 4px));
-    transition: opacity 120ms ease;
-    z-index: 5;
-  }
-
-  .footer-curtain-item {
-    position: relative;
-    z-index: 10;
-  }
 }
 
 /* ==========================================================================

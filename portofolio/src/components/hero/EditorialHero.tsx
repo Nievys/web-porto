@@ -79,9 +79,8 @@ export const EditorialHero: React.FC = () => {
               Frontend & Mobile Dev
             </h2>
           </div>
-          <br />
           <div className="editorial-hero__craft-badge" title="Precision Engineering & Product Craftsmanship">
-            <Sparkles size={14} className="editorial-hero__craft-symbol" />
+            <Sparkles size={13} className="editorial-hero__craft-symbol" />
             <span>Engineering + Craft</span>
           </div>
         </div>
@@ -92,12 +91,12 @@ export const EditorialHero: React.FC = () => {
           <div className="editorial-hero__actions">
             <a href="#projects" className="editorial-hero__btn editorial-hero__btn--primary">
               <span>Selected Works</span>
-              <ArrowUpRight size={17} />
+              <ArrowUpRight size={15} />
             </a>
 
             <a href="#contact" className="editorial-hero__btn editorial-hero__btn--outline">
               <span>Let's Talk</span>
-              <ArrowDown size={15} />
+              <ArrowDown size={14} />
             </a>
           </div>
 

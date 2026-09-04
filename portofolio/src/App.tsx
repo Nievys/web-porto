@@ -26,23 +26,15 @@ export const App: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Content Flow: Projects & Experience */}
+      {/* Main Content Flow: Projects, Experience, and Skills */}
       <main className="main-content-flow" style={{ flex: 1, position: 'relative', zIndex: 5, backgroundColor: 'var(--color-background)' }}>
         <Projects />
         <Experience />
-        {/* <Approach /> */}
-        {/* <Contact /> - Replaced by the interactive physics contact footer */}
+        <Skills />
       </main>
 
-      {/* Dedicated Curtain Reveal Group: Skills holds stationary while Footer rises over it */}
-      <div className="skills-footer-curtain-group">
-        <div className="skills-curtain-item">
-          <Skills />
-        </div>
-        <div className="footer-curtain-item">
-          <Footer />
-        </div>
-      </div>
+      {/* Interactive Physics Contact Footer */}
+      <Footer />
     </div>
   );
 };

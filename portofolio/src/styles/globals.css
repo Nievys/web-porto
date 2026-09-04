@@ -108,7 +108,7 @@ ol {
   scroll-margin-top: 50px;
 }
 
-@media (min-width: 1900px) {
+@media (min-width: 2000px) {
   .section-wrapper {
     padding-top: var(--space-3xl);
     padding-bottom: var(--space-3xl);
@@ -214,7 +214,7 @@ ol {
   --side-nav-tooltip-padding: 0.22rem 0.6rem;
 }
 
-@media (min-width: 1900px) {
+@media (min-width: 2000px) {
   :root {
     /* 2K Top Navbar Tokens (Full Scale) */
     --nav-top-pos: 18px;
@@ -287,16 +287,16 @@ ol {
 
 /* 1. On screens <= 1080p:
    Move DOWN below the "Top" button in the footer topbar */
-@media (max-width: 1899px) {
+@media (max-width: 1999px) {
   .side-navbar-container.footer-lifted {
     top: calc(100vh - min(580px, 90vh) + 64px) !important;
     transform: translateY(0) !important;
   }
 }
 
-/* 2. On 2K screens (>= 1900px):
+/* 2. On 2K screens (>= 2000px):
    Lift UP into top half of screen above footer */
-@media (min-width: 1900px) {
+@media (min-width: 2000px) {
   .side-navbar-container.footer-lifted {
     top: 50% !important;
     transform: translateY(calc(-50% - 270px)) !important;
