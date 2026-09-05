@@ -174,7 +174,7 @@ export const Navbar: React.FC = () => {
                 overflow: 'hidden'
               }}
             >
-              TYO INDRA
+              TYNOSORUS
             </span>
             <span
               style={{
