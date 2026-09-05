@@ -8,9 +8,9 @@ import { skillCategories } from '../../data/skills';
 export const Skills: React.FC = () => {
   return (
     <section id="skills" className="section-wrapper">
-      <Container>
+      <Container size="lg">
         {/* Section Header */}
-        <div style={{ marginBottom: '2.5rem' }}>
+        <div style={{ marginBottom: 'clamp(1rem, 1.8vh, 1.8rem)' }}>
           <Reveal direction="up" delay={50}>
             <SectionLabel number="04" label="Skills & Technologies" />
             <h2
@@ -31,9 +31,10 @@ export const Skills: React.FC = () => {
 
         {/* 6 Category Grid */}
         <div
+          className="skills-curtain-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: '1.25rem',
             marginBottom: '2.5rem'
           }}
@@ -45,7 +46,7 @@ export const Skills: React.FC = () => {
                   backgroundColor: 'var(--color-surface-cream)',
                   border: '1.5px solid var(--color-border)',
                   borderRadius: 'var(--radius-xl)',
-                  padding: 'clamp(1.25rem, 1.8vw, 1.6rem)',
+                  padding: 'clamp(1.15rem, 1.4vw, 1.5rem)',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',

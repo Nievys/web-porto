@@ -194,7 +194,8 @@
 }
 
 /* ==========================================================================
-   SKILLS & FOOTER FLOW (Clean non-overlapping document flow)
+   CURTAIN REVEAL EFFECT (Dedicated Skills-Footer Group)
+   Skills stays stationary while Footer rises over it from below
    ========================================================================== */
 .skills-footer-curtain-group {
   position: relative;
@@ -211,6 +212,65 @@
 .footer-curtain-item {
   position: relative;
   width: 100%;
+}
+
+/* Dedicated blur backdrop overlay over the frozen Skills section */
+.skills-curtain-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(19, 47, 60, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: var(--footer-reveal-progress, 0);
+  transition: opacity 120ms ease-out;
+  z-index: 5;
+}
+
+@media (min-width: 900px) {
+  .skills-curtain-item {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--color-background);
+  }
+
+  .skills-curtain-item #skills {
+    scroll-margin-top: 0;
+    padding-top: clamp(0.75rem, 2vh, 1.75rem);
+    padding-bottom: clamp(0.75rem, 2vh, 1.75rem);
+    width: 100%;
+  }
+
+  .skills-curtain-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1.25rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .footer-curtain-item {
+    position: relative;
+    z-index: 10;
+  }
+}
+
+@media (min-width: 1900px) {
+  .skills-curtain-grid {
+    gap: 1.6rem !important;
+  }
+}
+
+@media (max-width: 899px) {
+  .skills-curtain-backdrop {
+    display: none;
+  }
 }
 
 /* ==========================================================================

@@ -443,6 +443,10 @@ export const Footer: React.FC = () => {
           const curtainGroup = container.closest('.skills-footer-curtain-group') as HTMLElement | null;
           if (curtainGroup) {
             curtainGroup.style.setProperty('--footer-reveal-progress', progress.toFixed(3));
+            const backdrop = curtainGroup.querySelector('.skills-curtain-backdrop') as HTMLElement | null;
+            if (backdrop) {
+              backdrop.style.opacity = progress.toFixed(3);
+            }
           }
         }
         ticking = false;
